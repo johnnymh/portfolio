@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Johnny's Portfolio</title>
+
+  <!-- Custom fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* CSS Variables */
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #131829;
+      --bg-card: rgba(20, 25, 40, 0.6);
+      --text-primary: #ffffff;
+      --text-secondary: #a1a8c3;
+      --accent-1: #00d4ff;
+      --accent-2: #7b3ff2;
+      --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #7b3ff2 100%);
+      --glow-color: rgba(0, 212, 255, 0.3);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --card-hover: rgba(20, 25, 40, 0.8);
+
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Animated Background Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--accent-1);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1) {
+      left: 10%;
+      top: 20%;
+      animation-duration: 15s;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      left: 80%;
+      top: 80%;
+      animation-duration: 18s;
+      animation-delay: 2s;
+    }
+
+    .particle:nth-child(3) {
+      left: 30%;
+      top: 60%;
+      animation-duration: 22s;
+      animation-delay: 4s;
+    }
+
+    .particle:nth-child(4) {
+      left: 70%;
+      top: 30%;
+      animation-duration: 16s;
+      animation-delay: 1s;
+    }
+
+    .particle:nth-child(5) {
+      left: 50%;
+      top: 10%;
+      animation-duration: 20s;
+      animation-delay: 3s;
+    }
+
+    .particle:nth-child(6) {
+      left: 20%;
+      top: 90%;
+      animation-duration: 19s;
+      animation-delay: 5s;
+    }
+
+    .particle:nth-child(7) {
+      left: 90%;
+      top: 50%;
+      animation-duration: 17s;
+      animation-delay: 2.5s;
+    }
+
+    .particle:nth-child(8) {
+      left: 40%;
+      top: 40%;
+      animation-duration: 21s;
+      animation-delay: 4.5s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+      }
+
+      25% {
+        transform: translate(50px, -50px) scale(1.2);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: translate(-30px, 50px) scale(0.8);
+        opacity: 0.2;
+      }
+
+      75% {
+        transform: translate(-50px, -30px) scale(1.1);
+        opacity: 0.4;
+      }
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Profile Section */
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .name-badge {
+      text-align: center;
+    }
+
+    .name {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    /* Bio Section */
+    .bio-section {
+      max-width: 700px;
+      margin: 0 auto 60px;
+      animation: fadeInUp 0.8s ease-out 0.3s backwards;
+    }
+
+    .bio-text {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      text-align: center;
+      font-weight: 300;
+    }
+
+    /* Projects Section */
+    .projects-section {
+      animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    /* Project Cards */
+    .project-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .card-glow {
+      position: absolute;
+      inset: 0;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .project-card:hover .card-glow {
+      opacity: 0.1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      background: var(--card-hover);
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .card-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      filter: grayscale(0.3);
+      transition: filter 0.3s ease;
+    }
+
+    .project-card:hover .card-icon {
+      filter: grayscale(0);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-description {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      font-weight: 300;
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(123, 63, 242, 0.2);
+      border: 1px solid rgba(123, 63, 242, 0.3);
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--accent-2);
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    .card-arrow {
+      position: relative;
+      z-index: 1;
+      font-size: 24px;
+      color: var(--accent-1);
+      align-self: flex-end;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .card-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-color);
+      animation: fadeInUp 0.8s ease-out 0.5s backwards;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-1);
+      transform: translateY(-2px);
+    }
+
+    .social-link svg {
+      transition: transform 0.3s ease;
+    }
+
+    .social-link:hover svg {
+      transform: rotate(360deg);
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .name {
+        font-size: 32px;
+      }
+
+      .bio-text {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .project-card {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-icon {
+        font-size: 32px;
+      }
+
+      .card-title {
+        font-size: 20px;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Animated background particles -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="name-badge">
+        <h1 class="name">Johnny Maroun El Helou</h1>
+      </div>
+    </div>
+
+    <!-- Bio Section -->
+    <div class="bio-section">
+      <p class="bio-text">
+        Welcome! I'm a front-end developer specializing in React, passionate about creating
+        beautiful and functional web experiences. I harness the power of React with a touch
+        and help of AI to craft amazing and modern designs and websites. Currently honing my
+        skills through personal projects that showcase my learning journey and growing expertise.
+        Soon entering the UI/UX field to combine design thinking with development. Feel free to
+        explore my work, and thank you for visiting!
+      </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-section">
+      <h2 class="section-title">Featured Projects</h2>
+
+      <div class="projects-grid">
+        <a href="https://johnnymh.github.io/phoxul-studio/" class="project-card">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-icon">📸</div>
+            <h3 class="card-title">Phoxul Studio</h3>
+            <p class="card-description">Photography portfolio platform</p>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://johnnymh.github.io/postbox/" class="project-card">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-icon">📮</div>
+            <h3 class="card-title">PostBox</h3>
+            <p class="card-description">Modern messaging interface</p>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://johnnymh.github.io/guessmynumber/" class="project-card">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-icon">🎯</div>
+            <h3 class="card-title">Guess My Number</h3>
+            <p class="card-description">Interactive number game</p>
+            <span class="card-badge">Desktop Only</span>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://johnnymh.github.io/modalwindow/" class="project-card">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-icon">🪟</div>
+            <h3 class="card-title">Modal Window</h3>
+            <p class="card-description">UI component showcase</p>
+            <span class="card-badge">Desktop Only</span>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://johnnymh.github.io/thepiggame/" class="project-card">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-icon">🎲</div>
+            <h3 class="card-title">The Pig Game</h3>
+            <p class="card-description">Multiplayer dice game</p>
+            <span class="card-badge">Desktop Only</span>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://johnnymh.github.io/quizgame/" class="project-card">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <div class="card-icon">🧠</div>
+            <h3 class="card-title">Quiz Game</h3>
+            <p class="card-description">Interactive trivia challenge</p>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="https://x.com/johnnymhelou" class="social-link" aria-label="X (Twitter)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            fill="currentColor" />
+        </svg>
+        <span>@johnnymhelou</span>
+      </a>
+
+      <div class="footer-text">
+        © 2026 Johnny Maroun El Helou
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
